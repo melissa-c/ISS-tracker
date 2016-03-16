@@ -23,6 +23,9 @@ Client-side:
 - Text input field for address on Earth.
 - Display the distance between the ISS and the address in km and mi.
 
+###Wireframe:
+![wireframe](img/wireframe.png "wireframe of website design")
+
 ###Stretch:
 - Update ISS coordinates as it moves and have the displayed distance update accordingly.
 - Map with clickable marker for address location.
