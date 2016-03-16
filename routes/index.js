@@ -3,8 +3,17 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index');
 });
+
+request
+  .get("https://010pixel-distance-v1.p.mashape.com/?lat1=10&lat2=34.5&long1=-25.3&long2=-403.4&unit=K")
+  .set("X-Mashape-Key", process.env.X_MASHAPE_KEY)
+  .set("Accept", "application/json")
+  .end(function (result) {
+  console.log(result.status, result.headers, result.body);
+});
+
 
 module.exports = router;
 
