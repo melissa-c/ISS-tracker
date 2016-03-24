@@ -2,7 +2,7 @@
   "name": "ISS-tracker",
   "version": "1.0.0",
   "scripts": {
-    "start": "node ./index.js",
+    "start": "node ./routes/v1/index.js",
     "test": "node test/**.js | tap-spec"
   },
   "dependencies": {
@@ -13,6 +13,7 @@
     "dotenv": "^2.0.0",
     "express": "~4.13.1",
     "jade": "~1.11.0",
+    "jquery": "^2.2.2",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "supertest": "^1.2.0"

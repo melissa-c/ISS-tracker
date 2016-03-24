@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>ISS Tracker</title>
+  </head>
+  <body>
+    <div class="title">
+      <h1>ISS Tracker</h1>
+    </div>
+
+    <div class="distance">
+      <h2>Distance of ISS from your location</h2>
+      <p>
+        <span class="km"> km</span>
+        <span class="miles"> mi</span>
+      </p>
+    </div>
+
+    <div class="astronauts">
+      <h3>Current Astronauts in the ISS</h3>
+      <ol class="astronauts"></ol>
+    </div>
+
+    <div class="issCoords">
+      <h3>Current ISS coordinates</h3>
+      <p>
+        <span class="lat">Latitude: </span>
+        <span class="long">Longitude: </span>
+      </p>
+    </div>
+
+    <div class="earth">
+      <h3>Your location</h3>
+      <input id="address" type="textbox" placeholder="e.g.: Wellington, NZ">
+      <input type="button" value="Submit" onlick="codeAddress()">
+      <p>
+        <span class="lat">Latitude: </span>
+        <span class="long">Longitude: </span>
+      </p>
+    </div>
+
+    <div class="earthCoords">
+      <h3>Your coordinates</h3>
+      <p>
+        <span class="lat">Latitude: </span>
+        <span class="long">Longitude: </span>
+      </p>
+    </div>
+
+    <div id="map">
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+  </body>
+</html>
