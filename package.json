@@ -2,7 +2,9 @@
   "name": "ISS-tracker",
   "version": "1.0.0",
   "scripts": {
-    "start": "node ./routes/v1/index.js",
+    "start": "node server.js",
+    "serve": "node-dev server.js",
+    "watch-client": "watchify src/index.js -o client/bundle.js -dv",
     "test": "node test/**.js | tap-spec"
   },
   "dependencies": {
@@ -12,11 +14,12 @@
     "debug": "~2.2.0",
     "dotenv": "^2.0.0",
     "express": "~4.13.1",
+    "hyperscript": "^1.4.7",
     "jade": "~1.11.0",
     "jquery": "^2.2.2",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "supertest": "^1.2.0"
+    "superagent": "^1.8.3"
   },
   "description": "International Space Station tracker",
   "main": "app.js",
@@ -25,7 +28,10 @@
   },
   "devDependencies": {
     "tap-spec": "^4.1.1",
-    "tape": "^4.5.1"
+    "tape": "^4.5.1",
+    "node-dev": "^3.1.0",
+    "supertest": "^1.2.0",
+    "watchify": "^3.7.0"
   },
   "repository": {
     "type": "git",

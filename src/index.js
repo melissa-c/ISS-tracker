@@ -1,28 +1,35 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 var $ = require('jquery')
+var request = require('superagent')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index');
-});
+// router.get('/', function(req, res, next) {
+//   res.render('index');
+// });
 
-$.getJSONP('http://api.open-notify.org/astros.json', function(data){
+$.get({url:'http://api.open-notify.org/astros.json', dataType:'jsonp'})
+  .done(function(data){
   for (var i = 0; i < data.people.length; i++){
-    $('ol.astronauts').append('<li>'+data.people[i].name+'</li>')
+    $('.astronauts ol').append('<li>', data.people[i].name,'</li>')
   }
 })
 
+$.get({url:'http://api.open-notify.org/iss-now.json', dataType:'jsonp'})
+  .done(function(data){
+    $('.issCoords .lat').append(data.iss_position.latitude)
+    $('.issCoords .long').append(data.iss_position.longitude)
+})
+
 function initMap(){
-  var mapDiv = document.getElementById('map');
+  var mapDiv = $('#map');
   var map = new google.maps.Map(mapDiv, {
     center: {lat: -41.287, lng: 174.776}, zoom: 8
   });
 }
 
 module.exports = router;
-
-// request
+//request
 //   .get("https://010pixel-distance-v1.p.mashape.com/?lat1=10&lat2=34.5&long1=-25.3&long2=-403.4&unit=K")
 //   .set("X-Mashape-Key", process.env.X_MASHAPE_KEY)
 //   .set("Accept", "application/json")
