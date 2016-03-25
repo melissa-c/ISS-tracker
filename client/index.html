@@ -12,16 +12,22 @@
   </head>
 
   <body>
+  <div class="main">
     <div class="title">
       <h1>ISS Tracker</h1>
     </div>
 
     <div class="distance">
-      <h2>Distance of ISS from your location</h2>
-      <p>
+      <h2>
+        Distance of the<br>
+        International Space Station<br>
+        from your location
+      </h2>
+      <h4>
         <span class="km"> km</span>
+        /
         <span class="miles"> mi</span>
-      </p>
+      </h4>
     </div>
 
     <div class="astronauts">
@@ -34,26 +40,30 @@
       <h3>Current ISS coordinates</h3>
       <p>
         <span class="lat">Latitude: </span>
+        <br>
         <span class="long">Longitude: </span>
       </p>
     </div>
 
     <div class="earth">
       <h3>Your location</h3>
-      <input id="address" type="textbox" placeholder="e.g.: Wellington, NZ">
-      <input type="button" value="Submit" onlick="codeAddress()">
+      <textarea id="address" type="textbox" rows="4" cols="30" placeholder="e.g.: Wellington, NZ"></textarea>
+      <br>
+      <input id="Submit" type="button" value="Submit" onlick="codeAddress()">
     </div>
 
     <div class="earthCoords">
       <h3>Your coordinates</h3>
       <p>
         <span class="lat">Latitude: </span>
+        <br>
         <span class="long">Longitude: </span>
       </p>
     </div>
 
     <div id="map">
     </div>
+  </div>
 
   </body>
 </html>

@@ -6,20 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var dotenv = require('dotenv')
 
-var routes = require('./src/index');
-
 var app = express();
 
 dotenv.load()
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'client')));
 
-app.use('/', index);
+app.use(express.static(path.join(__dirname, 'client')));
 
 // Define the port to run on
 app.set('port', 3000)

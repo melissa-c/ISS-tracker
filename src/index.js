@@ -1,5 +1,3 @@
-var express = require('express')
-var router = express.Router()
 var $ = require('jquery')
 var request = require('superagent')
 
@@ -11,24 +9,43 @@ var request = require('superagent')
 $.get({url:'http://api.open-notify.org/astros.json', dataType:'jsonp'})
   .done(function(data){
   for (var i = 0; i < data.people.length; i++){
-    $('.astronauts ol').append('<li>', data.people[i].name,'</li>')
+    $('.astronauts ol').append('<li>' + data.people[i].name +'</li>')
   }
 })
 
 $.get({url:'http://api.open-notify.org/iss-now.json', dataType:'jsonp'})
   .done(function(data){
-    $('.issCoords .lat').append(data.iss_position.latitude)
-    $('.issCoords .long').append(data.iss_position.longitude)
+    $('.issCoords .lat').append((data.iss_position.latitude).toFixed(3))
+    $('.issCoords .long').append((data.iss_position.longitude).toFixed(3))
 })
 
-function initMap(){
-  var mapDiv = $('#map');
-  var map = new google.maps.Map(mapDiv, {
-    center: {lat: -41.287, lng: 174.776}, zoom: 8
+function initMap() {
+  var map = new google.maps.Map($('#map'), {
+    zoom: 8,
+    center: {lat: -41.287, lng: 174.776}
+  });
+  var geocoder = new google.maps.Geocoder();
+
+  $('#submit').addEventListener('click', function() {
+    geocodeAddress(geocoder, map);
   });
 }
 
-module.exports = router;
+function geocodeAddress(geocoder, resultsMap) {
+  var address = $('#address').value;
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Sorry an error occurred: ' + status);
+    }
+  });
+}
+
 //request
 //   .get("https://010pixel-distance-v1.p.mashape.com/?lat1=10&lat2=34.5&long1=-25.3&long2=-403.4&unit=K")
 //   .set("X-Mashape-Key", process.env.X_MASHAPE_KEY)
