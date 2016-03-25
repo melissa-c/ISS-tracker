@@ -26,7 +26,7 @@ function initMap() {
   });
   var geocoder = new google.maps.Geocoder();
 
-  $('#submit').addEventListener('click', function() {
+  $('#submit').click(function() {
     geocodeAddress(geocoder, map);
   });
 }
