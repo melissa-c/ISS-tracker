@@ -4,41 +4,45 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="UTF-8">
     <title>ISS Tracker</title>
+    <link href='https://fonts.googleapis.com/css?family=Rubik|Audiowide|Aldrich' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
 
   <body>
   <div class="main">
     <div class="title">
-      <h1>ISS Tracker</h1>
+      <h1>ISS TRACKER</h1>
     </div>
 
     <div class="distance">
-      <h2>
-        Distance of the<br>
-        International Space Station<br>
-        from your location
-      </h2>
-      <h4>
-        <span class="km"> km</span>
-        /
-        <span class="miles"> mi</span>
+      <h3>
+        Distance of the International Space Station from your location
+      </h3>
+      <h3>
+        <span class="km"> km</span> / <span class="miles"> mi</span>
       </h4>
     </div>
 
-    <div class="astronauts">
-      <h3>Current Astronauts in the ISS</h3>
-      <ol class="astronauts">
-      </ol>
+    <div class="issCoords">
+      <h3>ISS coordinates</h3>
+      <p class="title">Latitude:</p>
+      <p class="lat"></p>
+      <p class="title">Longitude:</p>
+      <p class="long"></p>
     </div>
 
-    <div class="issCoords">
-      <h3>Current ISS coordinates</h3>
-      <p>
-        <span class="lat">Latitude: </span>
-        <br>
-        <span class="long">Longitude: </span>
-      </p>
+    <div class="earthCoords">
+      <h3>Your coordinates</h3>
+      <p class="title">Latitude:</p>
+      <p class="lat"></p>
+      <p class="title">Longitude:</p>
+      <p class="long"></p>
+    </div>
+
+    <div class="astronauts">
+      <h3>Astronauts in the ISS</h3>
+      <ol class="astronauts">
+      </ol>
     </div>
 
     <div class="earth">
@@ -46,15 +50,6 @@
       <textarea id="address" type="textbox" rows="4" cols="30" placeholder="e.g.: Wellington, NZ"></textarea>
       <br>
       <input id="submit" type="button" value="Submit" onlick="codeAddress()">
-    </div>
-
-    <div class="earthCoords">
-      <h3>Your coordinates</h3>
-      <p>
-        <span class="lat">Latitude: </span>
-        <br>
-        <span class="long">Longitude: </span>
-      </p>
     </div>
 
     <div id="map">

@@ -9,7 +9,7 @@ var request = require('superagent')
 $.get({url:'http://api.open-notify.org/astros.json', dataType:'jsonp'})
   .done(function(data){
   for (var i = 0; i < data.people.length; i++){
-    $('.astronauts ol').append('<li>' + data.people[i].name +'</li>')
+    $('.astronauts ol').append('<li>' + data.people[i].name + '</li>')
   }
 })
 
