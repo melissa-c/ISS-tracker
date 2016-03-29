@@ -4,7 +4,7 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="UTF-8">
     <title>ISS Tracker</title>
-    <link href='https://fonts.googleapis.com/css?family=Rubik|Audiowide|Aldrich' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Rubik|Audiowide|Aldrich|Share+Tech+Mono' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
 
@@ -12,44 +12,50 @@
   <div class="main">
     <div class="title">
       <h1>ISS TRACKER</h1>
+      <h3>For International Space Station Stalkers</h3>
     </div>
 
     <div class="distance">
-      <h3>
-        Distance of the International Space Station from your location
-      </h3>
-      <h3>
-        <span class="km"> km</span> / <span class="miles"> mi</span>
-      </h4>
+      <p class="title">Distance between the ISS and your location:</p>
+      <div class="kmpart">
+        <p class="title">Kilometres:</p>
+        <p class="km">000000</p>
+      </div>
+      <div class="mipart">
+        <p class="title">Miles:</p>
+        <p class="miles">000000</p>
+      </div>
     </div>
 
     <div class="issCoords">
-      <h3>ISS coordinates</h3>
+      <h2>ISS Control Centre</h2>
+      <h3>Current Position</h3>
       <p class="title">Latitude:</p>
       <p class="lat"></p>
       <p class="title">Longitude:</p>
       <p class="long"></p>
+
+      <div class="astronauts">
+        <h3>Current Astronauts</h3>
+        <ol class="astronauts">
+        </ol>
+      </div>
     </div>
 
     <div class="earthCoords">
-      <h3>Your coordinates</h3>
+      <h2>Ground Control</h2>
       <p class="title">Latitude:</p>
-      <p class="lat"></p>
+      <p class="lat">-182.111</p>
       <p class="title">Longitude:</p>
-      <p class="long"></p>
-    </div>
+      <p class="long">0000000</p>
 
-    <div class="astronauts">
-      <h3>Astronauts in the ISS</h3>
-      <ol class="astronauts">
-      </ol>
-    </div>
-
-    <div class="earth">
-      <h3>Your location</h3>
-      <textarea id="address" type="textbox" rows="4" cols="30" placeholder="e.g.: Wellington, NZ"></textarea>
-      <br>
-      <input id="submit" type="button" value="Submit" onlick="codeAddress()">
+      <div class="earth">
+        <h3>Your Location</h3>
+        <p>Enter your address or click on the map below</p>
+        <textarea id="address" type="textbox" rows="4" placeholder="e.g.: 275 Cuba Street Wellington, NZ"></textarea>
+        <br>
+        <input id="submit" type="button" value="Submit" onlick="codeAddress()">
+      </div>
     </div>
 
     <div id="map">
