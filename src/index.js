@@ -14,41 +14,101 @@ $.get({url:'http://api.open-notify.org/astros.json', dataType:'jsonp'})
 })
 
 $.get({url:'http://api.open-notify.org/iss-now.json', dataType:'jsonp'})
+  // var interval = window.setInterval(showData, 3000)
   .done(function showData(data){
     $('.issCoords .lat').append((data.iss_position.latitude).toFixed(3))
     $('.issCoords .long').append((data.iss_position.longitude).toFixed(3))
 })
-    setInterval(function(){
-      return showData
-    }, 3000)
 
+// var mapOptions = {
+//     center: new google.maps.LatLng(37.7831,-122.4039),
+//     zoom: 12,
+//     mapTypeId: google.maps.MapTypeId.ROADMAP
+// }
 
-function initMap() {
-  var map = new google.maps.Map($('#map'), {
-    zoom: 8,
-    center: {lat: -41.287, lng: 174.776}
-  });
-  var geocoder = new google.maps.Geocoder();
+// new google.maps.Map(document.getElementById('map'), mapOptions)
+  
+// function initMap() {
+//   });
+  // center: new google.maps.LatLng(-41.287, 174.776),
+//   var geocoder = new google.maps.Geocoder();
 
-  $('#submit').click(function() {
-    geocodeAddress(geocoder, map);
-  });
-}
+//   $('#submit').click(function() {
+//     geocodeAddress(geocoder, map);
+//   });
+// }
 
-function geocodeAddress(geocoder, resultsMap) {
-  var address = $('#address').value;
-  geocoder.geocode({'address': address}, function(results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      resultsMap.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-        map: resultsMap,
-        position: results[0].geometry.location
-      });
-    } else {
-      alert('Sorry an error occurred: ' + status);
-    }
-  });
-}
+// function geocodeAddress(geocoder, resultsMap) {
+//   var address = $('#address').value;
+//   geocoder.geocode({'address': address}, function(results, status) {
+//     if (status === google.maps.GeocoderStatus.OK) {
+//       resultsMap.setCenter(results[0].geometry.location);
+//       var marker = new google.maps.Marker({
+//         map: resultsMap,
+//         position: results[0].geometry.location
+//       });
+//     } else {
+//       alert('Sorry an error occurred: ' + status);
+//     }
+//   });
+// }
+
+// var mapOptions = {
+//     center: new google.maps.LatLng(37.7831,-122.4039),
+//     zoom: 12,
+//     mapTypeId: google.maps.MapTypeId.ROADMAP
+// };
+
+// var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+// var autocomplete = new google.maps.places.Autocomplete(document.getElementById('address'),acOptions);
+// autocomplete.bindTo('bounds',map);
+// var infoWindow = new google.maps.InfoWindow();
+// var marker = new google.maps.Marker({
+//   map: map
+// });
+
+// google.maps.event.addListener(autocomplete, 'place_changed', function() {
+//   infoWindow.close();
+//   var place = autocomplete.getPlace();
+//   if (place.geometry.viewport) {
+//     map.fitBounds(place.geometry.viewport);
+//   } else {
+//     map.setCenter(place.geometry.location);
+//     map.setZoom(17);
+//   }
+//   marker.setPosition(place.geometry.location);
+//   infoWindow.setContent('<div><strong>' + place.name + '</strong><br>');
+//   infoWindow.open(map, marker);
+//   google.maps.event.addListener(marker,'click',function(e){
+
+//     infoWindow.open(map, marker);
+
+//   });
+// });
+
+//GEOCODE RESULTS:
+
+// results[]: {
+//  types[]: string,
+//  formatted_address: string,
+//  address_components[]: {
+//    short_name: string,
+//    long_name: string,
+//    postcode_localities[]: string,
+//    types[]: string
+//  },
+//  partial_match: boolean,
+//  place_id: string,
+//  postcode_localities[]: string,
+//  geometry: {
+//    location: LatLng,
+//    location_type: GeocoderLocationType
+//    viewport: LatLngBounds,
+//    bounds: LatLngBounds
+//  }
+// }
+
 
 //request
 //   .get("https://010pixel-distance-v1.p.mashape.com/?lat1=10&lat2=34.5&long1=-25.3&long2=-403.4&unit=K")
