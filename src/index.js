@@ -14,10 +14,14 @@ $.get({url:'http://api.open-notify.org/astros.json', dataType:'jsonp'})
 })
 
 $.get({url:'http://api.open-notify.org/iss-now.json', dataType:'jsonp'})
-  .done(function(data){
+  .done(function showData(data){
     $('.issCoords .lat').append((data.iss_position.latitude).toFixed(3))
     $('.issCoords .long').append((data.iss_position.longitude).toFixed(3))
 })
+    setInterval(function(){
+      return showData
+    }, 3000)
+
 
 function initMap() {
   var map = new google.maps.Map($('#map'), {

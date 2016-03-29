@@ -13,27 +13,28 @@
     <div class="title">
       <h1>ISS TRACKER</h1>
       <h3>For International Space Station Stalkers</h3>
+      <p>Enter details into Ground Control</p>
     </div>
 
+<!-- ========== DISTANCE ========== -->
     <div class="distance">
       <p class="title">Distance between the ISS and your location:</p>
       <div class="kmpart">
         <p class="title">Kilometres:</p>
-        <p class="km">000000</p>
+        <p class="km">&nbsp;</p>
       </div>
       <div class="mipart">
         <p class="title">Miles:</p>
-        <p class="miles">000000</p>
+        <p class="miles">&nbsp;</p>
       </div>
     </div>
-
+<!-- ========== ISS ========== -->
     <div class="issCoords">
       <h2>ISS Control Centre</h2>
-      <h3>Current Position</h3>
       <p class="title">Latitude:</p>
-      <p class="lat"></p>
+      <p class="lat">&nbsp;</p>
       <p class="title">Longitude:</p>
-      <p class="long"></p>
+      <p class="long">&nbsp;</p>
 
       <div class="astronauts">
         <h3>Current Astronauts</h3>
@@ -42,22 +43,24 @@
       </div>
     </div>
 
+<!-- ========== EARTH ========== -->
     <div class="earthCoords">
       <h2>Ground Control</h2>
       <p class="title">Latitude:</p>
-      <p class="lat">-182.111</p>
+      <p class="lat">&nbsp;</p>
       <p class="title">Longitude:</p>
-      <p class="long">0000000</p>
+      <p class="long">&nbsp;</p>
 
       <div class="earth">
-        <h3>Your Location</h3>
-        <p>Enter your address or click on the map below</p>
+        <h3>Location on Earth</h3>
+        <p>Enter an address or click on the map below</p>
         <textarea id="address" type="textbox" rows="4" placeholder="e.g.: 275 Cuba Street Wellington, NZ"></textarea>
         <br>
-        <input id="submit" type="button" value="Submit" onlick="codeAddress()">
+        <input id="submit" type="button" value="Send to Major Tom" onlick="codeAddress()">
       </div>
     </div>
 
+<!-- ========== MAP ========== -->
     <div id="map">
     </div>
   </div>
