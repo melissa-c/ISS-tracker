@@ -20,6 +20,14 @@ $.get({url:'http://api.open-notify.org/iss-now.json', dataType:'jsonp'})
     $('.issCoords .long').append((data.iss_position.longitude).toFixed(3))
 })
 
+// $.get({url:'https://maps.googleapis.com/maps/api/geocode/json?'})
+//   .done(function showResults(results){
+//     $('.earthCoords .lat').append((results[0].geometry.location.lat()).toFixed(3))
+//     $('.earthCoords .long').append((results[0].geometry.location.lng()).toFixed(3))
+// })
+
+
+
 // var mapOptions = {
 //     center: new google.maps.LatLng(37.7831,-122.4039),
 //     zoom: 12,

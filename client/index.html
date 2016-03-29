@@ -6,6 +6,7 @@
     <title>ISS Tracker</title>
     <link href='https://fonts.googleapis.com/css?family=Rubik|Audiowide|Share+Tech+Mono' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   </head>
 
   <body>
@@ -47,9 +48,9 @@
     <div class="earthCoords">
       <h2>Ground Control</h2>
       <p class="title">Latitude:</p>
-      <p class="lat">&nbsp;</p>
+      <p id="earthlat">&nbsp;</p>
       <p class="title">Longitude:</p>
-      <p class="long">&nbsp;</p>
+      <p id="earthlong">&nbsp;</p>
 
       <div class="earth">
         <h3>Location on Earth</h3>
@@ -128,16 +129,23 @@
       geocoder.geocode({'address': address}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           resultsMap.setCenter(results[0].geometry.location);
-          console.log(results[0].geometry.location[0])  /*-----function??----*/
+/*-------  console.log(results[0].geometry.location.lng())  ----- function!! ----*/
           var marker = new google.maps.Marker({
             map: resultsMap,
             position: results[0].geometry.location
           });
+            var eLat = (results[0].geometry.location.lat()).toFixed(3)
+            var eLong = (results[0].geometry.location.lng()).toFixed(3)
+            console.log(eLat, eLong)
+            $('#earthlat').append(eLat);
+            $('#earthlong').append(eLong);
+          
         } else {
           alert('An error has occurred: ' + status);
         }
       });
     }
+
   </script>
   <script async defer
   src="https://maps.googleapis.com/maps/api/js?&libraries=places&callback=initMap">
