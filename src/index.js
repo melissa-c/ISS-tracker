@@ -6,6 +6,7 @@ var request = require('superagent')
 //   res.render('index');
 // });
 
+
 $.get({url:'http://api.open-notify.org/astros.json', dataType:'jsonp'})
   .done(function(data){
   for (var i = 0; i < data.people.length; i++){
@@ -22,25 +23,30 @@ $.get({url:'http://api.open-notify.org/iss-now.json', dataType:'jsonp'})
     $('.issCoords .long').append(issLong)
   // setInterval('showData()', 3000)
 
-  var eaLat = $('#earthlat').text()
-  var eaLong = $('#earthlong').text()
-    // if(eaLat.length >=1 && eaLong.length >=1){
+
+$(function(){
+  $('#submit').click(function(){
+  
+  var eaLat = $('#earthlat')[0].innerText.toString()
+  var eaLong = $('#earthlong')[0].innerText.toString()
+    if(eaLat.length > 0 && eaLong.length > 0){
     request
-      .post('https://010pixel-distance-v1.p.mashape.com/?lat1='+eaLat+'&lat2='+issLat+'&long1='+eaLong+'&long2='+issLong+'&unit=K')
-      .set('X-Mashape-Key', 'o16QxQP3nGmsh3qEqrioS517ZH66p148RXojsnD7DenTy3gDDV')
+      // .get("https://010pixel-distance-v1.p.mashape.com/?lat1=10&lat2=34.5&long1=-25.3&long2=-403.4&unit=K")
+      .get('https://010pixel-distance-v1.p.mashape.com/?lat1='+eaLat+'&lat2='+issLat+'&long1='+eaLong+'&long2='+issLong+'&unit=K')
+      .set('X-Mashape-Key', 'iUpUnMXdjNmshUO3gVrYdQUn1N4Fp1YYWnFjsn8duAwp0JRzmP')
       .set('Accept', 'application/json')
       .end(function (result) {
-        // $('#submit').click(function(){
-        console.log(result.body)
-        var calckm = (result.body.value).toFixed(2)
-        $('.km').append(calckm)
-        $('.miles').append(calckm * 0.62137)
+        console.log(result)
+        // var calckm = (result.body.value).toFixed(2)
+        // $('.km').text(calckm)
+        // $('.miles').text(calckm * 0.62137)
       })
-    // } else {
-    //     $('.km').append(" ")
-    //     $('.miles').append(" ")
-    // }
-  // })
+    } else {
+        $('.km').text(" ")
+        $('.miles').text(" ")
+    }
+  })
+})
 })
 
 

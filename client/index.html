@@ -55,7 +55,7 @@
       <div class="earth">
         <h3>Location on Earth</h3>
         <p>Enter an address below</p>
-        <textarea id="address" type="textbox" rows="4" placeholder="e.g.: 275 Cuba Street Wellington, NZ"></textarea>
+        <textarea id="address" type="text" placeholder="e.g.: 275 Cuba Street Wellington, NZ"></textarea>
         <br>
         <input id="submit" type="button" value="Get my location" onlick="deleteMarkers()">
       </div>
@@ -67,6 +67,9 @@
 
   <script src="bundle.js"></script>
   <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?&libraries=places&callback=initMap">
+  </script>
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js?&libraries=places"></script> -->
   <!-- <script src="https://maps.googleapis.com/maps/api/js?&libraries=places"></script> -->
 
@@ -82,52 +85,51 @@
 
       document.getElementById('submit').addEventListener('click', function() {
         geocodeAddress(geocoder, map);
-        map.setZoom(5);
+        markers.splice(0, 1, marker);
       });
-    }
+    
+      var input = document.getElementById('address');
 
-    var input = document.getElementById('address');
-
-    // var autocomplete = new google.maps.places.Autocomplete(input);
-    // autocomplete.bindTo('bounds', map);
+      var autocomplete = new google.maps.places.Autocomplete(input);
+    
 
     // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    // var infowindow = new google.maps.InfoWindow();
-    // var marker = new google.maps.Marker({
-    //   map: map
-    // });
-    // markers.splice(0, 1, marker);
+    var infowindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map
+    });
 
-    // marker.addListener('click', function() {
-    //   infowindow.open(map, marker);
-    // });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
 
-    // autocomplete.addListener('place_changed', function() {
-    //   infowindow.close();
-    //   var place = autocomplete.getPlace();
-    //   if (!place.geometry) {
-    //     return;
-    //   }
+    autocomplete.addListener('place_changed', function() {
+      infowindow.close();
+      var place = autocomplete.getPlace();
+      if (!place.geometry) {
+        return;
+      }
 
-    //   if (place.geometry.viewport) {
-    //     map.fitBounds(place.geometry.viewport);
-    //   } else {
-    //     map.setCenter(place.geometry.location);
-    //     map.setZoom(17);
-    //   }
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+      } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(5);
+      }
 
-    //   marker.setPlace({
-    //     placeId: place.place_id,
-    //     location: place.geometry.location
-    //   });
-    //   marker.setVisible(true);
+      marker.setPlace({
+        placeId: place.place_id,
+        location: place.geometry.location
+      });
+      marker.setVisible(true);
 
-    //   infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-    //       'Place ID: ' + place.place_id + '<br>' +
-    //       place.formatted_address);
-    //   infowindow.open(map, marker);
-    // });
+      infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+          'Place ID: ' + place.place_id + '<br>' +
+          place.formatted_address);
+      infowindow.open(map, marker);
+    });
+    }
 
     function geocodeAddress(geocoder, resultsMap) {
       var address = document.getElementById('address').value;
@@ -140,8 +142,8 @@
           });
             var eLat = (results[0].geometry.location.lat()).toFixed(3)
             var eLong = (results[0].geometry.location.lng()).toFixed(3)
-            $('#earthlat').append(eLat);
-            $('#earthlong').append(eLong);
+            $('#earthlat').text(eLat);
+            $('#earthlong').text(eLong);
         } else {
           alert('An error has occurred: ' + status);
         }
@@ -149,9 +151,5 @@
     }
 
   </script>
-  <script async defer
-  src="https://maps.googleapis.com/maps/api/js?&libraries=places&callback=initMap">
-  </script>
-
   </body>
 </html>
