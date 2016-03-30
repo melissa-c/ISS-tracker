@@ -22,24 +22,25 @@ $.get({url:'http://api.open-notify.org/iss-now.json', dataType:'jsonp'})
     $('.issCoords .long').append(issLong)
   // setInterval('showData()', 3000)
 
-  var eaLat = $('#earthlat')
-  var eaLong = $('#earthlong')
-  $('#submit').click(function(){
-    if(eaLat.length >=1 && eaLong.length >=1){
+  var eaLat = $('#earthlat').text()
+  var eaLong = $('#earthlong').text()
+    // if(eaLat.length >=1 && eaLong.length >=1){
     request
       .post('https://010pixel-distance-v1.p.mashape.com/?lat1='+eaLat+'&lat2='+issLat+'&long1='+eaLong+'&long2='+issLong+'&unit=K')
       .set('X-Mashape-Key', 'o16QxQP3nGmsh3qEqrioS517ZH66p148RXojsnD7DenTy3gDDV')
       .set('Accept', 'application/json')
-      .end(function (err, result) {
+      .end(function (result) {
+        // $('#submit').click(function(){
+        console.log(result.body)
         var calckm = (result.body.value).toFixed(2)
         $('.km').append(calckm)
         $('.miles').append(calckm * 0.62137)
       })
-    } else {
-        $('.km').append(" ")
-        $('.miles').append(" ")
-    }
-  })
+    // } else {
+    //     $('.km').append(" ")
+    //     $('.miles').append(" ")
+    // }
+  // })
 })
 
 
