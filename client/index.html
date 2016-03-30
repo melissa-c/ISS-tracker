@@ -22,20 +22,20 @@
       <p class="title">Distance between the ISS and your location:</p>
       <div class="kmpart">
         <p class="title">Kilometres:</p>
-        <p class="km">&nbsp;</p>
+        <p class="km"></p>
       </div>
       <div class="mipart">
         <p class="title">Miles:</p>
-        <p class="miles">&nbsp;</p>
+        <p class="miles"></p>
       </div>
     </div>
 <!-- ========== ISS ========== -->
     <div class="issCoords">
       <h2>ISS Control Centre</h2>
       <p class="title">Latitude:</p>
-      <p class="lat">&nbsp;</p>
+      <p class="lat"></p>
       <p class="title">Longitude:</p>
-      <p class="long">&nbsp;</p>
+      <p class="long"></p>
 
       <div class="astronauts">
         <h3>Current Astronauts</h3>
@@ -48,9 +48,9 @@
     <div class="earthCoords">
       <h2>Ground Control</h2>
       <p class="title">Latitude:</p>
-      <p id="earthlat">&nbsp;</p>
+      <p id="earthlat"></p>
       <p class="title">Longitude:</p>
-      <p id="earthlong">&nbsp;</p>
+      <p id="earthlong"></p>
 
       <div class="earth">
         <h3>Location on Earth</h3>
@@ -88,46 +88,46 @@
 
     var input = document.getElementById('address');
 
-    var autocomplete = new google.maps.places.Autocomplete(input);
-    autocomplete.bindTo('bounds', map);
+    // var autocomplete = new google.maps.places.Autocomplete(input);
+    // autocomplete.bindTo('bounds', map);
 
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    var infowindow = new google.maps.InfoWindow();
-    var marker = new google.maps.Marker({
-      map: map
-    });
+    // var infowindow = new google.maps.InfoWindow();
+    // var marker = new google.maps.Marker({
+    //   map: map
+    // });
     // markers.splice(0, 1, marker);
 
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
+    // marker.addListener('click', function() {
+    //   infowindow.open(map, marker);
+    // });
 
-    autocomplete.addListener('place_changed', function() {
-      infowindow.close();
-      var place = autocomplete.getPlace();
-      if (!place.geometry) {
-        return;
-      }
+    // autocomplete.addListener('place_changed', function() {
+    //   infowindow.close();
+    //   var place = autocomplete.getPlace();
+    //   if (!place.geometry) {
+    //     return;
+    //   }
 
-      if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
-      } else {
-        map.setCenter(place.geometry.location);
-        map.setZoom(17);
-      }
+    //   if (place.geometry.viewport) {
+    //     map.fitBounds(place.geometry.viewport);
+    //   } else {
+    //     map.setCenter(place.geometry.location);
+    //     map.setZoom(17);
+    //   }
 
-      marker.setPlace({
-        placeId: place.place_id,
-        location: place.geometry.location
-      });
-      marker.setVisible(true);
+    //   marker.setPlace({
+    //     placeId: place.place_id,
+    //     location: place.geometry.location
+    //   });
+    //   marker.setVisible(true);
 
-      infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-          'Place ID: ' + place.place_id + '<br>' +
-          place.formatted_address);
-      infowindow.open(map, marker);
-    });
+    //   infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+    //       'Place ID: ' + place.place_id + '<br>' +
+    //       place.formatted_address);
+    //   infowindow.open(map, marker);
+    // });
 
     function geocodeAddress(geocoder, resultsMap) {
       var address = document.getElementById('address').value;

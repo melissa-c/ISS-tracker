@@ -16,18 +16,73 @@ $.get({url:'http://api.open-notify.org/astros.json', dataType:'jsonp'})
 $.get({url:'http://api.open-notify.org/iss-now.json', dataType:'jsonp'})
   // var refresh = setInterval('showData()', 2000)
   .done(function showData(data){
-    $('.issCoords .lat').load((data.iss_position.latitude).toFixed(3))
-    $('.issCoords .long').load((data.iss_position.longitude).toFixed(3))
+    var issLat = (data.iss_position.latitude).toFixed(3)
+    var issLong = (data.iss_position.longitude).toFixed(3)
+    $('.issCoords .lat').append(issLat)
+    $('.issCoords .long').append(issLong)
+  // setInterval('showData()', 3000)
+
+  var eaLat = $('#earthlat')
+  var eaLong = $('#earthlong')
+  $('#submit').click(function(){
+    if(eaLat.length >=1 && eaLong.length >=1){
+    request
+      .post('https://010pixel-distance-v1.p.mashape.com/?lat1='+eaLat+'&lat2='+issLat+'&long1='+eaLong+'&long2='+issLong+'&unit=K')
+      .set('X-Mashape-Key', 'o16QxQP3nGmsh3qEqrioS517ZH66p148RXojsnD7DenTy3gDDV')
+      .set('Accept', 'application/json')
+      .end(function (err, result) {
+        var calckm = (result.body.value).toFixed(2)
+        $('.km').append(calckm)
+        $('.miles').append(calckm * 0.62137)
+      })
+    } else {
+        $('.km').append(" ")
+        $('.miles').append(" ")
+    }
   })
-  setInterval('showData()', 3000)
+})
+
+
+// $.ajax({
+//   url: 'https://SOMEAPI.p.mashape.com/', // The URL to the API. You can get this in the API page of the API you intend to consume
+//   type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+//   data: {}, // Additional parameters here
+//   dataType: 'json',
+//   success: function(data) { console.dir((data.source)); },
+//   error: function(err) { alert(err); },
+//   beforeSend: function(xhr) {
+//   xhr.setRequestHeader("X-Mashape-Authorization", "YOUR-MASHAPE-KEY"); // Enter here your Mashape key
+//   }
+// });  
+
+// Mashape API distance calculator:
+//.get("https://010pixel-distance-v1.p.mashape.com/?lat1=10&lat2=34.5&long1=-25.3&long2=-403.4&unit=K")
+// https://010pixel-distance-v1.p.mashape.com/
+//   .get.lat1
+//   .get.long1
+//   .get.lat2
+//   .get.long2
+//   .value
+//   .unit //K and M
+//     {
+//       "get": {
+//         "long2": "-32.3",
+//         "unit": "K",
+//         "lat1": "10",
+//         "lat2": "-25.3",
+//         "long1": "34.3"
+//       },
+//       "error": false,
+//       "value": 2794.30434845,
+//       "unit": "Kilometers"
+//     }
+
 
 // $.get({url:'https://maps.googleapis.com/maps/api/geocode/json?'})
 //   .done(function showResults(results){
 //     $('.earthCoords .lat').append((results[0].geometry.location.lat()).toFixed(3))
 //     $('.earthCoords .long').append((results[0].geometry.location.lng()).toFixed(3))
 // })
-
-
 
 // var mapOptions = {
 //     center: new google.maps.LatLng(37.7831,-122.4039),
@@ -118,14 +173,6 @@ $.get({url:'http://api.open-notify.org/iss-now.json', dataType:'jsonp'})
 //  }
 // }
 
-
-//request
-//   .get("https://010pixel-distance-v1.p.mashape.com/?lat1=10&lat2=34.5&long1=-25.3&long2=-403.4&unit=K")
-//   .set("X-Mashape-Key", process.env.X_MASHAPE_KEY)
-//   .set("Accept", "application/json")
-//   .end(function (result) {
-//   console.log(result.status, result.headers, result.body);
-// });
 /*
 ISS API current location:
 http://api.open-notify.org/iss-now.json
@@ -151,26 +198,5 @@ http://api.open-notify.org/astros.json
         {"name": NAME, "craft": SPACECRAFT_NAME},
         ...
       ]
-    }
-
-Mashape API distance calculator:
-https://010pixel-distance-v1.p.mashape.com/
-  .get.lat1
-  .get.long1
-  .get.lat2
-  .get.long2
-  .value
-  .unit //K and M
-    {
-      "get": {
-        "long2": "-32.3",
-        "unit": "K",
-        "lat1": "10",
-        "lat2": "-25.3",
-        "long1": "34.3"
-      },
-      "error": false,
-      "value": 2794.30434845,
-      "unit": "Kilometers"
     }
 */
