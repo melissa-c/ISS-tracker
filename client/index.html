@@ -54,10 +54,10 @@
 
       <div class="earth">
         <h3>Location on Earth</h3>
-        <p>Enter an address or click on the map below</p>
+        <p>Enter an address below</p>
         <textarea id="address" type="textbox" rows="4" placeholder="e.g.: 275 Cuba Street Wellington, NZ"></textarea>
         <br>
-        <input id="submit" type="button" value="Get my location" onlick="codeAddress()">
+        <input id="submit" type="button" value="Get my location" onlick="deleteMarkers()">
       </div>
     </div>
 
@@ -72,14 +72,17 @@
 
   <script>
     function initMap() {
+      var markers = []
+
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 1,
-        center: {lat: -41.287, lng: 174.776}
+        center: {lat: 19.897, lng: -155.583}
       });
       var geocoder = new google.maps.Geocoder();
 
       document.getElementById('submit').addEventListener('click', function() {
         geocodeAddress(geocoder, map);
+        map.setZoom(5);
       });
     }
 
@@ -94,6 +97,8 @@
     var marker = new google.maps.Marker({
       map: map
     });
+    // markers.splice(0, 1, marker);
+
     marker.addListener('click', function() {
       infowindow.open(map, marker);
     });
@@ -129,17 +134,14 @@
       geocoder.geocode({'address': address}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           resultsMap.setCenter(results[0].geometry.location);
-/*-------  console.log(results[0].geometry.location.lng())  ----- function!! ----*/
           var marker = new google.maps.Marker({
             map: resultsMap,
             position: results[0].geometry.location
           });
             var eLat = (results[0].geometry.location.lat()).toFixed(3)
             var eLong = (results[0].geometry.location.lng()).toFixed(3)
-            console.log(eLat, eLong)
             $('#earthlat').append(eLat);
             $('#earthlong').append(eLong);
-          
         } else {
           alert('An error has occurred: ' + status);
         }

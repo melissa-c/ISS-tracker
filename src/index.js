@@ -14,11 +14,12 @@ $.get({url:'http://api.open-notify.org/astros.json', dataType:'jsonp'})
 })
 
 $.get({url:'http://api.open-notify.org/iss-now.json', dataType:'jsonp'})
-  // var interval = window.setInterval(showData, 3000)
+  // var refresh = setInterval('showData()', 2000)
   .done(function showData(data){
-    $('.issCoords .lat').append((data.iss_position.latitude).toFixed(3))
-    $('.issCoords .long').append((data.iss_position.longitude).toFixed(3))
-})
+    $('.issCoords .lat').load((data.iss_position.latitude).toFixed(3))
+    $('.issCoords .long').load((data.iss_position.longitude).toFixed(3))
+  })
+  setInterval('showData()', 3000)
 
 // $.get({url:'https://maps.googleapis.com/maps/api/geocode/json?'})
 //   .done(function showResults(results){
