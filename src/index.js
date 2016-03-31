@@ -8,7 +8,7 @@ var request = require('superagent')
 
 
 $.get({url:'http://api.open-notify.org/astros.json', dataType:'jsonp'})
-  .done(function(data){
+.done(function(data){
   for (var i = 0; i < data.people.length; i++){
     $('.astronauts ol').append('<li>' + data.people[i].name + '</li>')
   }
@@ -19,34 +19,33 @@ $.get({url:'http://api.open-notify.org/iss-now.json', dataType:'jsonp'})
   .done(function showData(data){
     var issLat = (data.iss_position.latitude).toFixed(3)
     var issLong = (data.iss_position.longitude).toFixed(3)
-    $('.issCoords .lat').append(issLat)
-    $('.issCoords .long').append(issLong)
-  // setInterval('showData()', 3000)
+    $('.issCoords .lat').text(issLat)
+    $('.issCoords .long').text(issLong)
+  // $('.issCoords .lat').load('showData()', 3000)
+    // var autoRefresh = setInterval(function(){
+    //   $('.issCoords .lat').load(issLat);
+    //   $('.issCoords .long').load(issLong);
+    // }, 5000);
 
 
-$(function(){
-  $('#submit').click(function(){
-  
-  var eaLat = $('#earthlat')[0].innerText.toString()
-  var eaLong = $('#earthlong')[0].innerText.toString()
-    if(eaLat.length > 0 && eaLong.length > 0){
+getEarth = function (){
+  var eaLat = $('#earthlat').html()
+  var eaLong = $('#earthlong').html()
+  if(eaLat.length > 0 && eaLong.length > 0){
     request
-      // .get("https://010pixel-distance-v1.p.mashape.com/?lat1=10&lat2=34.5&long1=-25.3&long2=-403.4&unit=K")
       .get('https://010pixel-distance-v1.p.mashape.com/?lat1='+eaLat+'&lat2='+issLat+'&long1='+eaLong+'&long2='+issLong+'&unit=K')
-      .set('X-Mashape-Key', 'iUpUnMXdjNmshUO3gVrYdQUn1N4Fp1YYWnFjsn8duAwp0JRzmP')
+      .set('X-Mashape-Key', 'BBFxTmawcymshKCAoBfTWKv7eUDgp1IUCn6jsnEqGtzmRo884f')
       .set('Accept', 'application/json')
-      .end(function (result) {
-        console.log(result)
-        // var calckm = (result.body.value).toFixed(2)
-        // $('.km').text(calckm)
-        // $('.miles').text(calckm * 0.62137)
+      .end(function (err, result) {
+        var calckm = (result.body.value)
+        $('.km').text((calckm).toFixed(2))
+        $('.miles').text((calckm * 0.62137).toFixed(2))
       })
     } else {
         $('.km').text(" ")
         $('.miles').text(" ")
     }
-  })
-})
+  }
 })
 
 
@@ -98,7 +97,7 @@ $(function(){
 // }
 
 // new google.maps.Map(document.getElementById('map'), mapOptions)
-  
+
 // function initMap() {
 //   });
   // center: new google.maps.LatLng(-41.287, 174.776),
@@ -206,4 +205,4 @@ http://api.open-notify.org/astros.json
         ...
       ]
     }
-*/
+    */

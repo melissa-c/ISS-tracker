@@ -55,6 +55,7 @@
       <div class="earth">
         <h3>Location on Earth</h3>
         <p>Enter an address below</p>
+        <!-- shows error in console log because googlemaps only accepts input tags but ignore as this does not affect how it works -->
         <textarea id="address" type="text" placeholder="e.g.: 275 Cuba Street Wellington, NZ"></textarea>
         <br>
         <input id="submit" type="button" value="Get my location" onlick="deleteMarkers()">
@@ -124,8 +125,8 @@
       });
       marker.setVisible(true);
 
-      infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-          'Place ID: ' + place.place_id + '<br>' +
+      infowindow.setContent('<div><strong>' + place.name + '</strong><br>'/* +
+          'Place ID: ' + place.place_id + '<br>'*/ +
           place.formatted_address);
       infowindow.open(map, marker);
     });
@@ -144,6 +145,7 @@
             var eLong = (results[0].geometry.location.lng()).toFixed(3)
             $('#earthlat').text(eLat);
             $('#earthlong').text(eLong);
+            getEarth(eLat, eLong)
         } else {
           alert('An error has occurred: ' + status);
         }
