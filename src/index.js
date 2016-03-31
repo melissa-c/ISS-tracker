@@ -23,8 +23,8 @@ $.get({url:'http://api.open-notify.org/iss-now.json', dataType:'jsonp'})
     $('.issCoords .long').text(issLong)
   // $('.issCoords .lat').load('showData()', 3000)
     var autoRefresh = setInterval(function(){
-      $('.issCoords .lat').html(issLat);
-      $('.issCoords .long').html(issLong);
+      $('.issCoords .lat').load(issLat);
+      $('.issCoords .long').load(issLong);
     }, 5000);
 
 
